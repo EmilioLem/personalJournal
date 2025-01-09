@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Journal</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#aed9e0">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="new-entry">
+            <button id="publishBtn">Publish</button>
+            <input type="text" id="entryTitle">
+            <textarea id="entryText" placeholder="Start writing..."></textarea>
+            <div id="wordCount">0 words</div>
+        </div>
+        <div id="journalEntries">
+            <!-- Journal entries will be displayed here -->
+        </div>
+        <button id="exportBtn">Export as JSON</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#aed9e0" rx="64"/>
+  
+  <!-- Journal book shape -->
+  <rect x="96" y="64" width="320" height="384" fill="#fff" rx="16"/>
+  <rect x="96" y="64" width="40" height="384" fill="#e0f7fa" rx="8"/>
+  
+  <!-- Lines representing text -->
+  <rect x="176" y="128" width="200" height="8" fill="#b2dfdb" rx="4"/>
+  <rect x="176" y="160" width="160" height="8" fill="#b2dfdb" rx="4"/>
+  <rect x="176" y="192" width="180" height="8" fill="#b2dfdb" rx="4"/>
+  <rect x="176" y="256" width="200" height="8" fill="#b2dfdb" rx="4"/>
+  <rect x="176" y="288" width="140" height="8" fill="#b2dfdb" rx="4"/>
+  <rect x="176" y="320" width="180" height="8" fill="#b2dfdb" rx="4"/>
+</svg>

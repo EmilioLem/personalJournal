@@ -1,0 +1,177 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f8ff; /* Light pastel blue */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+.container {
+    width: 80%;
+    max-width: 800px;
+}
+
+.journal-card {
+    background-color: #e0f7fa; /* Lighter pastel teal */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 100px; /* Initial contracted height */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+}
+
+.journal-card.expanded {
+    max-height: 500px; /* Adjust as needed */
+}
+
+.journal-card h3 {
+    margin: 0 0 5px 0; /* Adjusted margin */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px; /* Add padding here for visual space */
+    box-sizing: border-box;
+}
+
+.journal-card p {
+    margin: 0;
+    padding: 0 15px 15px 15px; /* Add padding here for visual space */
+    box-sizing: border-box;
+}
+
+.card-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.card-actions button {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #b2dfdb; /* Example pastel color */
+    color: #333;
+    font-size: 0.8em;
+}
+
+.card-actions button:hover {
+    background-color: #80cbc4;
+}
+
+.journal-card.editing h3 span,
+.journal-card.editing p {
+    /* Remove default padding/border for editing */
+    padding: 0;
+}
+
+.journal-card.editing h3 span input.edit-title {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.journal-card.editing p textarea.edit-content {
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.new-entry {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative; /* For floating word count */
+    box-sizing: border-box;
+}
+
+#publishBtn {
+    background-color: #aed9e0; /* Pastel teal */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#entryTitle {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#entryText {
+    width: 100%;
+    height: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+#wordCount {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.word-limit-low {
+    background-color: #ffe0b2 !important; /* Light orange for low word count */
+}
+
+.word-limit-ok {
+    background-color: #b9f6ca !important; /* Light green for OK word count */
+}
+
+.word-limit-high {
+    background-color: #ffcdd2 !important; /* Light red for high word count */
+}
+
+#exportBtn {
+    background-color: #b2ebf2; /* Another pastel color */
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Add these rules to your existing style.css */
+
+/* Hide edit button by default */
+.journal-card .edit-btn {
+    display: none;
+}
+
+/* Show edit button only when card is expanded */
+.journal-card.expanded .edit-btn {
+    display: inline-block;
+}
+
+/* Hide expand button when editing */
+.journal-card.editing .expand-btn {
+    display: none;
+}
