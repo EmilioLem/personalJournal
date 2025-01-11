@@ -17,12 +17,35 @@ self.addEventListener('install', (event) => {
         return cache.addAll(ASSETS_TO_CACHE);
       })
       .then(() => {
-        return self.skipWaiting();
+        //return self.skipWaiting();
+        return cache.addAll(ASSETS_TO_CACHE);
       })
   );
 });
 
-// Activate event - clean up old caches
+self.addEventListener('fetch', event => {
+  event.respondWith(
+      fetch(event.request) // Always fetch from the network
+          .catch(() => caches.match(event.request)) // If network fails, fall back to cache
+  );
+});
+
+self.addEventListener('activate', event => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+      caches.keys().then(cacheNames => {
+          return Promise.all(
+              cacheNames.map(cacheName => {
+                  if (cacheWhitelist.indexOf(cacheName) === -1) {
+                      return caches.delete(cacheName);
+                  }
+              })
+          );
+      })
+  );
+});
+
+/*/ Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -48,4 +71,4 @@ self.addEventListener('fetch', (event) => {
         return fetch(event.request);
       })
   );
-});
+});*/

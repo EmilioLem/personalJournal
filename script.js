@@ -251,4 +251,28 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
+    
+    // Export as TXT
+const exportTxtBtn = document.getElementById('exportTxtBtn');
+exportTxtBtn.addEventListener('click', () => {
+    let txtContent = '';
+    journalEntries
+        .sort((a, b) => new Date(a.date) - new Date(b.date)) // Changed sort order to ascending
+        .forEach(entry => {
+            const formattedDate = formatDate(new Date(entry.date));
+            // Replace all newlines in content with spaces and add just one newline at the end
+            const singleLineContent = entry.content.replace(/\n/g, ' ');
+            txtContent += `${entry.id}-${formattedDate} - ${singleLineContent}\n\n`;
+        });
+
+    const blob = new Blob([txtContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `journal-export-${formatDate(new Date())}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
 });
