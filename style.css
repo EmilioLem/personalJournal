@@ -21,12 +21,12 @@ body {
     margin-bottom: 10px;
     transition: max-height 0.3s ease;
     overflow: hidden;
-    max-height: 100px; /* Initial contracted height */
+    max-height: 120px; /* Initial contracted height */
     box-sizing: border-box; /* Ensure padding is included in width/height */
 }
 
 .journal-card.expanded {
-    max-height: 500px; /* Adjust as needed */
+    max-height: max-content; /* Adjust as needed */
 }
 
 .journal-card h3 {
@@ -277,4 +277,12 @@ body {
     .journal-card.editing h3 span input.edit-title {
         font-size: 16px;
     }
+}
+
+#wordLevelSelector {
+    padding: 8px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
 }

@@ -1,4 +1,29 @@
+const getWordRange = () => {
+    const level = localStorage.getItem('wordLevel') || 'noob'; // Default to Noob
+    const ranges = {
+        noob: { min: 128, max: 256 },
+        pro: { min: 256, max: 512 },
+        legend: { min: 512, max: 1024 }
+    };
+    return ranges[level];
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    const wordLevelSelector = document.getElementById('wordLevelSelector');
+
+    // Load previously selected level from localStorage or set default to 'noob'
+    wordLevelSelector.value = localStorage.getItem('wordLevel') || 'noob';
+
+    // Listen for changes to the selector and store the new level in localStorage
+    wordLevelSelector.addEventListener('change', () => {
+        const selectedLevel = wordLevelSelector.value;
+        localStorage.setItem('wordLevel', selectedLevel);
+        updateWordCount(); // Reevaluate the word count coloring based on the new level
+    });
+
+
     const publishBtn = document.getElementById('publishBtn');
     const entryTitleInput = document.getElementById('entryTitle');
     const entryTextInput = document.getElementById('entryText');
@@ -35,6 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateWordCount = () => {
         const text = entryTextInput.value;
         const wordCount = countWords(text);
+        const { min, max } = getWordRange();
+
+        wordCountDisplay.textContent = `${wordCount} words`;
+
+        // Reset classes
+        entryTextInput.classList.remove('word-limit-low', 'word-limit-ok', 'word-limit-high');
+
+        if (wordCount < min) {
+            entryTextInput.classList.add('word-limit-low');
+        } else if (wordCount <= max) {
+            entryTextInput.classList.add('word-limit-ok');
+        } else {
+            entryTextInput.classList.add('word-limit-high');
+        }
+
+        /*const text = entryTextInput.value;
+        const wordCount = countWords(text);
         wordCountDisplay.textContent = `${wordCount} words`;
 
         entryTextInput.classList.remove('word-limit-low', 'word-limit-ok', 'word-limit-high');
@@ -44,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             entryTextInput.classList.add('word-limit-ok');
         } else {
             entryTextInput.classList.add('word-limit-high');
-        }
+        }*/
     };
 
     // Event listener for text input to count words
@@ -205,6 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleInputValue = entryTitleInput.value.trim();
         const content = entryTextInput.value.trim();
         let newSerialNumber = serialNumber;
+        const { min, max } = getWordRange();
+        const wordCount = countWords(content);
 
         const match = titleInputValue.match(/^ID(\d+)/);
         if (match) {
@@ -214,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const title = titleInputValue || `ID${newSerialNumber}-${formatDate(new Date())}`;
 
-        if (countWords(content) >= 128 && countWords(content) <= 256) {
+        if (wordCount >= min && wordCount <= max) {
             const newEntry = {
                 id: `ID${newSerialNumber}`,
                 date: new Date().toISOString(),
@@ -229,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateWordCount();
             renderEntries();
         } else {
-            alert("Entry must be between 128 and 256 words.");
+            alert("Word count out of the set limit.");
         }
     });
 
