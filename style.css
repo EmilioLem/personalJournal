@@ -100,8 +100,8 @@ body {
 }
 
 #publishBtn {
-    background-color: #aed9e0; /* Pastel teal */
-    color: white;
+    background-color: #b2dfdb;/*#aed9e0; /* Pastel teal */
+    color: black;/*white;*/
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -284,5 +284,6 @@ body {
     margin-left: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: #b2dfdb;/*#fff;*/
+    background-color: #e0f7fa/*#b2dfdb;/*#fff;*/
+    color: #333;
 }
