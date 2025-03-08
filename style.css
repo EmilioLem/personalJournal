@@ -59,6 +59,16 @@ body {
     font-size: 0.8em;
 }
 
+.card-actions p {
+    padding: 6px 8px;
+    border: none;
+    color: #333;
+    font-size: 0.7em;
+    /* font-weight: lighter; */
+
+    /* font-size: 14px; */
+}
+
 .card-actions button:hover {
     background-color: #80cbc4;
 }

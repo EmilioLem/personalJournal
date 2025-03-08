@@ -194,10 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
         journalEntries.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(entry => {
             const card = document.createElement('div');
             card.classList.add('journal-card');
+            const wordCount = countWords(entry.content);
             card.innerHTML = `
                 <h3>
                     <span>${entry.title}</span>
                     <div class="card-actions">
+                        <p class="word-count">${wordCount} words</p>
                         <button class="expand-btn">Expand</button>
                         <button class="edit-btn">Edit</button>
                     </div>
